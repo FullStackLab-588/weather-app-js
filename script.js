@@ -100,30 +100,28 @@
 
 
 // DOM Elements
-let cityName = document.querySelector(".weather-city");
-let dateTime = document.querySelector(".weather-date-time");
-let weathForecast = document.querySelector(".weather-forcast");
-let weathTempr = document.querySelector(".weather-tempera");
-let weathIcon = document.querySelector(".weather-icon");
-let weathMin = document.querySelector(".weather-min");
-let weathMax = document.querySelector(".weather-max");
-
-let weathFeelsLike = document.querySelector(".weather-feels-like");
-let weathHumidity = document.querySelector(".weather-humidity");
-let weathWind = document.querySelector(".weather-wind");
-let weathPressure = document.querySelector(".weather-pressure");
-
-let citySearch = document.querySelector(".weather-search");
+const cityName = document.querySelector(".weather-city");
+const dateTime = document.querySelector(".weather-date-time");
+const weathForecast = document.querySelector(".weather-forcast");
+const weathTempr = document.querySelector(".weather-tempera");
+const weathIcon = document.querySelector(".weather-icon");
+const weathMin = document.querySelector(".weather-min");
+const weathMax = document.querySelector(".weather-max");
+const weathFeelsLike = document.querySelector(".weather-feels-like");
+const weathHumidity = document.querySelector(".weather-humidity");
+const weathWind = document.querySelector(".weather-wind");
+const weathPressure = document.querySelector(".weather-pressure");
+const citySearch = document.querySelector(".weather-search");
 
 // Default city
 let city = "Havelian";
 
-// Country Name
+// Country Name function
 const getCountryName = (code) => {
   return new Intl.DisplayNames(["en"], { type: "region" }).of(code);
 };
 
-// Date & Time
+// Format Unix timestamp to readable date
 const getDateTime = (dt) => {
   const curDate = new Date(dt * 1000);
   const options = {
@@ -137,17 +135,20 @@ const getDateTime = (dt) => {
   return new Intl.DateTimeFormat("en-US", options).format(curDate);
 };
 
-// Search City
+// Search city functionality
 citySearch.addEventListener("submit", (e) => {
   e.preventDefault();
-  let input = document.querySelector(".city-name");
+
+  const input = document.querySelector(".city-name"); // input field
   city = input.value.trim();
+
   if (city !== "") {
     getWeatherData();
+    input.value = ""; // clear input after search
   }
 });
 
-// Fetch Weather Data
+// Fetch weather data from OpenWeatherMap
 const getWeatherData = async () => {
   try {
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=a0b06669a793506ae54060f7df8a5fb6`;
@@ -166,24 +167,22 @@ const getWeatherData = async () => {
     dateTime.innerHTML = getDateTime(dt);
 
     weathForecast.innerHTML = weather[0].main;
-    weathIcon.innerHTML = `
-      <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" 
-           alt="${weather[0].description}">
-    `;
+    weathIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="${weather[0].description}">`;
 
-    weathTempr.innerHTML = `${main.temp.toFixed(1)}&#176;C`;
-    weathMin.innerHTML = `Min: ${main.temp_min.toFixed(1)}&#176;C`;
-    weathMax.innerHTML = `Max: ${main.temp_max.toFixed(1)}&#176;C`;
+    weathTempr.innerHTML = `${main.temp.toFixed(1)}°C`;
+    weathMin.innerHTML = `Min: ${main.temp_min.toFixed(1)}°C`;
+    weathMax.innerHTML = `Max: ${main.temp_max.toFixed(1)}°C`;
 
-    weathFeelsLike.innerHTML = `${main.feels_like.toFixed(1)}&#176;C`;
+    weathFeelsLike.innerHTML = `${main.feels_like.toFixed(1)}°C`;
     weathHumidity.innerHTML = `${main.humidity}%`;
     weathWind.innerHTML = `${wind.speed} m/s`;
     weathPressure.innerHTML = `${main.pressure} hPa`;
 
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error fetching weather data:", error);
   }
 };
 
-// Load Default City Weather
+// Load default city weather on page load
 window.addEventListener("load", getWeatherData);
+
