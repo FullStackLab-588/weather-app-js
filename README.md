@@ -3,6 +3,8 @@
 A simple, interactive weather application built with **HTML, CSS, and JavaScript**.  
 It fetches live weather data from the [OpenWeatherMap API](https://openweathermap.org/api) and displays it in a responsive, user-friendly interface.
 
+Check out the live app here: [Weather App Live](https://fullstacklab-588.github.io/weather-app-js/)
+
 ---
 
 ## Features
@@ -15,7 +17,7 @@ It fetches live weather data from the [OpenWeatherMap API](https://openweatherma
   - Humidity
   - Wind speed
   - Atmospheric pressure
-  - Weather forecast (e.g., Clear, Clouds, Rain)
+  - Weather forecast (Clear, Clouds, Rain, etc.)
   - Weather icons from OpenWeatherMap
 - Real-time date and time formatting
 - Responsive layout for mobile and desktop
@@ -27,4 +29,4 @@ It fetches live weather data from the [OpenWeatherMap API](https://openweatherma
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/weather-app-js.git
+git clone https://github.com/FullStackLab-588/weather-app-js.git
