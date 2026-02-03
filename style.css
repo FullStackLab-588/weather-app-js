@@ -145,7 +145,7 @@ body {
 /* Responsive for screens <= 480px */
 @media screen and (max-width: 480px) {
   .container {
-    width: 60%;
+    width: 80%;
     padding: 15px;
   }
 
